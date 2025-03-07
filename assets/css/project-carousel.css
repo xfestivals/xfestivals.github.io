@@ -1,0 +1,401 @@
+/* 프로젝트 카드 스타일 개선 - projects.html을 위한 CSS */
+
+/* 미니멀 변수 */
+:root {
+  --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --transition-normal: all 0.3s ease;
+  --border-radius-md: 16px;
+  --border-radius-lg: 30px;
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 프로젝트 카드 개선 */
+.project-card {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-color);
+  position: relative;
+}
+
+.project-card:hover {
+  transform: translateY(-5px); /* 호버 효과 순한 느낌으로 조정 */
+  box-shadow: var(--shadow-md);
+  border-color: rgba(49, 130, 246, 0.2);
+}
+
+.project-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.project-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 70%, rgba(0, 0, 0, 0.3));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-image::after {
+  opacity: 1;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  opacity: 0;
+}
+
+.project-image img.loaded {
+  opacity: 1;
+}
+
+.project-card:hover .project-image img.loaded {
+  transform: scale(1.05);
+}
+
+.project-content {
+  padding: 22px;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.project-tag {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: var(--transition-normal);
+}
+
+.project-card:hover .project-tag {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.project-tag.featured {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.project-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
+}
+
+.project-card:hover .project-title {
+  color: var(--accent-color);
+}
+
+.project-description {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.project-links {
+  display: flex;
+  gap: 12px;
+}
+
+.project-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 13px;
+  font-weight: 500;
+  transition: var(--transition-normal);
+  opacity: 0.7;
+}
+
+.project-link:hover {
+  color: var(--accent-color);
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+.project-link-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* 피처드 프로젝트 개선 */
+.featured-project {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 60px;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  transition: var(--transition-normal);
+}
+
+.featured-project:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(49, 130, 246, 0.2);
+}
+
+.featured-project-image {
+  border-radius: 0;
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+}
+
+.featured-project-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, transparent 80%, rgba(0, 0, 0, 0.3));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.featured-project:hover .featured-project-image::after {
+  opacity: 1;
+}
+
+.featured-project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  opacity: 0;
+}
+
+.featured-project-image img.loaded {
+  opacity: 1;
+}
+
+.featured-project:hover .featured-project-image img.loaded {
+  transform: scale(1.03);
+}
+
+.featured-project-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+}
+
+.featured-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(49, 130, 246, 0.1);
+  color: var(--accent-color);
+  padding: 5px 12px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  width: fit-content;
+}
+
+.accent-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.featured-project-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  transition: color 0.3s ease;
+}
+
+.featured-project:hover .featured-project-title {
+  color: var(--accent-color);
+}
+
+.featured-project-description {
+  font-size: 15px;
+  opacity: 0.8;
+  margin-bottom: 25px;
+  line-height: 1.7;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+
+.tech-item {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: var(--transition-normal);
+}
+
+.featured-project:hover .tech-item {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  text-decoration: none;
+  width: fit-content;
+}
+
+.project-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(49, 130, 246, 0.2);
+}
+
+.project-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.project-btn:hover svg {
+  transform: translateX(3px);
+}
+
+/* 섹션 제목 개선 */
+.section-title {
+  position: relative;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 40px;
+  text-align: center;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background-color: var(--accent-color);
+  border-radius: 3px;
+}
+
+/* View All Projects 버튼 */
+.view-all {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.outline-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  text-decoration: none;
+}
+
+.outline-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  transform: translateY(-3px);
+}
+
+.outline-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.outline-btn:hover svg {
+  transform: translateY(3px);
+}
+
+/* 미디어 쿼리 개선 */
+@media (max-width: 768px) {
+  .featured-project {
+    grid-template-columns: 1fr;
+  }
+  
+  .featured-project-image {
+    height: 250px;
+  }
+  
+  .featured-project-content {
+    padding: 25px;
+  }
+  
+  .featured-project-title {
+    font-size: 24px;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .featured-project-content {
+    padding: 20px;
+  }
+  
+  .featured-project-title {
+    font-size: 22px;
+  }
+  
+  .featured-project-description {
+    font-size: 14px;
+  }
+  
+  .tech-stack {
+    margin-bottom: 20px;
+  }
+  
+  .project-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

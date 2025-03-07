@@ -1,0 +1,244 @@
+.academic-section {
+    padding: 100px 0;
+    background-color: rgba(49, 130, 246, 0.03);
+  }
+  
+  .academic-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+  }
+  
+  .academic-tab {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .academic-tab:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .academic-tab.active {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+  }
+  
+  .academic-content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .academic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+  }
+  
+  .academic-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  
+  .academic-item.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .course-card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .course-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  }
+  
+  .course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .course-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent-color);
+  }
+  
+  .course-grade {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  
+  .course-year {
+    display: inline-block;
+    font-size: 14px;
+    opacity: 0.7;
+    margin-bottom: 15px;
+  }
+  
+  .course-description {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .course-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .course-skill {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .academic-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .award-item, .activity-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 20px;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .award-item:hover, .activity-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  }
+  
+  .award-icon, .activity-icon {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(49, 130, 246, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+  }
+  
+  .award-icon svg, .activity-icon svg {
+    width: 32px;
+    height: 32px;
+    stroke-width: 1.5;
+  }
+  
+  .award-header, .activity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  .award-title, .activity-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent-color);
+  }
+  
+  .award-year, .activity-year {
+    font-size: 14px;
+    opacity: 0.7;
+    white-space: nowrap;
+    margin-left: 15px;
+  }
+  
+  .award-organization, .activity-organization {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .award-description, .activity-description {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  
+  /* 애니메이션 지연 효과 */
+  .academic-item:nth-child(2) {
+    transition-delay: 0.1s;
+  }
+  .academic-item:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+  .academic-item:nth-child(4) {
+    transition-delay: 0.3s;
+  }
+  .academic-item:nth-child(5) {
+    transition-delay: 0.4s;
+  }
+  .academic-item:nth-child(6) {
+    transition-delay: 0.5s;
+  }
+  
+  /* 반응형 스타일 */
+  @media (max-width: 768px) {
+    .academic-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .academic-tabs {
+      flex-direction: row;
+      overflow-x: auto;
+      padding-bottom: 15px;
+    }
+    
+    .award-item, .activity-item {
+      grid-template-columns: 50px 1fr;
+    }
+    
+    .award-icon, .activity-icon {
+      width: 50px;
+      height: 50px;
+    }
+    
+    .award-icon svg, .activity-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .award-header, .activity-header {
+      flex-direction: column;
+    }
+    
+    .award-year, .activity-year {
+      margin-left: 0;
+      margin-top: 5px;
+    }
+  }

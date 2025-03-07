@@ -1,218 +1,187 @@
-// Theme Switching Functionality
-const themeToggle = document.getElementById('themeToggle');
-const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-
-// Function to set the theme
-function setTheme(theme) {
-    if (theme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-        updateThemeIcon('light');
-    } else {
-        document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'dark');
-        updateThemeIcon('dark');
-    }
-}
-
-// Function to update the theme toggle icon
-function updateThemeIcon(theme) {
-    if (themeToggle) {
-        if (theme === 'light') {
-            themeToggle.innerHTML = `
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zm-2 5.79V18h-3.52L12 20.48 9.52 18H6v-3.52L3.52 12 6 9.52V6h3.52L12 3.52 14.48 6H18v3.52L20.48 12 18 14.48zM12 6.5c-3.03 0-5.5 2.47-5.5 5.5s2.47 5.5 5.5 5.5 5.5-2.47 5.5-5.5-2.47-5.5-5.5-5.5zm0 9c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
-                    <circle cx="12" cy="12" r="2"/>
-                </svg>
-            `;
-        } else {
-            themeToggle.innerHTML = `
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"/>
-                    <path d="M9 9h6v6H9z"/>
-                </svg>
-            `;
+// macOS style top navbar with magnification effect
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('header');
+    const nav = document.querySelector('nav');
+    const navLinks = document.querySelector('.nav-links');
+    
+    // Ensure header is at the top
+    header.style.position = 'fixed';
+    header.style.top = '0';
+    header.style.width = '100%';
+    header.style.backdropFilter = 'blur(10px)';
+    header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+    header.style.transition = 'transform 0.3s ease';
+    
+    // Create a macOS-style container for the navigation links
+    const macContainer = document.createElement('div');
+    macContainer.className = 'mac-navbar-container';
+    macContainer.style.display = 'flex';
+    macContainer.style.justifyContent = 'center';
+    macContainer.style.alignItems = 'center';
+    macContainer.style.padding = '5px 0';
+    
+    // Preserve the original layout
+    nav.style.justifyContent = 'space-between';
+    
+    if (navLinks) {
+      // Clone the nav-links
+      const macLinks = navLinks.cloneNode(true);
+      macLinks.className = 'mac-navbar-links';
+      macLinks.style.display = 'flex';
+      macLinks.style.justifyContent = 'center';
+      macLinks.style.alignItems = 'center';
+      macLinks.style.gap = '20px';
+      macLinks.style.transition = 'all 0.3s ease';
+      
+      // Style each link for macOS effect
+      Array.from(macLinks.children).forEach(link => {
+        if (link.classList.contains('nav-link')) {
+          link.style.display = 'flex';
+          link.style.alignItems = 'center';
+          link.style.justifyContent = 'center';
+          link.style.position = 'relative';
+          link.style.transition = 'transform 0.2s ease, filter 0.2s ease';
+          
+          // Get the icon
+          const icon = link.querySelector('.nav-link-icon');
+          if (icon) {
+            icon.style.width = '22px';
+            icon.style.height = '22px';
+            icon.style.transition = 'transform 0.2s ease';
+          }
+          
+          // Get the text
+          const text = link.querySelector('span');
+          if (text) {
+            text.style.fontSize = '14px';
+            text.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
+          }
         }
-    }
-}
-
-// Check for saved theme preference or use the system preference
-const currentTheme = localStorage.getItem('theme') || (prefersDarkScheme.matches ? 'dark' : 'light');
-setTheme(currentTheme);
-
-// Toggle theme when the button is clicked
-if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = localStorage.getItem('theme') || (prefersDarkScheme.matches ? 'dark' : 'light');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        setTheme(newTheme);
-    });
-}
-
-// Listen for system theme changes
-prefersDarkScheme.addEventListener('change', (e) => {
-    const newTheme = e.matches ? 'dark' : 'light';
-    setTheme(newTheme);
-});
-
-// Language Selector Functionality
-const languageBtn = document.getElementById('languageBtn');
-const currentLang = document.querySelector('.current-lang');
-const languageDropdown = document.querySelector('.language-dropdown');
-const languageOptions = document.querySelectorAll('.language-option');
-
-// Dictionary for translations
-const translations = {
-    en: {
-        home: 'Home',
-        projects: 'My Projects',
-        about: 'About Me',
-        connect: 'Let\'s Connect',
-        location: 'Based in',
-        getInTouch: 'Get In Touch',
-        letsWork: 'Let\'s Work Together'
-    },
-    es: {
-        home: 'Inicio',
-        projects: 'Mis Proyectos',
-        about: 'Sobre Mí',
-        connect: 'Conectemos',
-        location: 'Basado en',
-        getInTouch: 'Ponte en Contacto',
-        letsWork: 'Trabajemos Juntos'
-    },
-    ko: {
-        home: '홈',
-        projects: '프로젝트',
-        about: '소개',
-        connect: '연락하기',
-        location: '위치',
-        getInTouch: '연락처',
-        letsWork: '함께 일해요'
-    }
-};
-
-// Toggle language dropdown
-if (languageBtn) {
-    languageBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        languageDropdown.classList.toggle('show');
-    });
-
-    // Close dropdown when clicking elsewhere
-    document.addEventListener('click', () => {
-        if (languageDropdown.classList.contains('show')) {
-            languageDropdown.classList.remove('show');
-        }
-    });
-}
-
-// Prevent clicks within dropdown from closing it
-if (languageDropdown) {
-    languageDropdown.addEventListener('click', (e) => {
-        e.stopPropagation();
-    });
-}
-
-// Set active language and change content
-if (languageOptions && languageOptions.length > 0) {
-    languageOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            const lang = this.getAttribute('data-lang');
+      });
+      
+      // Add magnification effect to navbar links
+      const applyMagnification = (event) => {
+        const navRect = macLinks.getBoundingClientRect();
+        const mouseX = event.clientX;
+        
+        Array.from(macLinks.querySelectorAll('.nav-link')).forEach(link => {
+          const linkRect = link.getBoundingClientRect();
+          const linkCenterX = linkRect.left + linkRect.width / 2;
+          const distance = Math.abs(mouseX - linkCenterX);
+          const maxDistance = 100; // Maximum distance where magnification is applied
+          
+          if (distance < maxDistance) {
+            // Calculate scale based on distance (closer = larger)
+            const scale = 1 + 0.15 * (1 - distance / maxDistance);
             
-            // Update active option
-            languageOptions.forEach(opt => opt.classList.remove('active'));
-            this.classList.add('active');
+            // Apply scaling to the link
+            link.style.transform = `scale(${scale})`;
             
-            // Update button text
-            if (currentLang) {
-                currentLang.textContent = this.textContent;
+            // Enhance the icon
+            const icon = link.querySelector('.nav-link-icon');
+            if (icon) {
+              icon.style.transform = `scale(${scale * 1.1})`;
             }
             
-            // Save preference in localStorage
-            localStorage.setItem('language', lang);
+            // Enhance the text
+            const text = link.querySelector('span');
+            if (text) {
+              text.style.opacity = '1';
+              text.style.fontWeight = 'bold';
+            }
             
-            // Update content based on selected language
-            updateLanguage(lang);
+            link.style.zIndex = '10';
+          } else {
+            link.style.transform = 'scale(1)';
+            
+            const icon = link.querySelector('.nav-link-icon');
+            if (icon) {
+              icon.style.transform = 'scale(1)';
+            }
+            
+            const text = link.querySelector('span');
+            if (text) {
+              text.style.opacity = '0.8';
+              text.style.fontWeight = 'normal';
+            }
+            
+            link.style.zIndex = '1';
+          }
         });
-    });
-}
-
-// Function to update content based on language
-function updateLanguage(lang) {
-    if (!translations[lang]) return;
-    
-    // Update navigation links
-    const homeLink = document.querySelector('.nav-link:nth-child(1) span');
-    const projectsLink = document.querySelector('.nav-link:nth-child(2) span');
-    const aboutLink = document.querySelector('.nav-link:nth-child(3) span');
-    
-    if (homeLink) homeLink.textContent = translations[lang].home;
-    if (projectsLink) projectsLink.textContent = translations[lang].projects;
-    if (aboutLink) aboutLink.textContent = translations[lang].about;
-    
-    // Update connect button
-    const connectBtn = document.querySelector('.connect-btn');
-    if (connectBtn && !connectBtn.querySelector('.accent-dot')) {
-        connectBtn.textContent = translations[lang].connect;
-    }
-    
-    // Update location text
-    const locationEl = document.querySelector('.location');
-    if (locationEl) {
-        const locationText = locationEl.innerHTML.split('<br>');
-        if (locationText.length > 1) {
-            locationEl.innerHTML = `// ${translations[lang].location}<br>${locationText[1]}`;
-        }
-    }
-    
-    // Update contact section title if on about page
-    const contactTitle = document.querySelector('.contact-section .section-title');
-    if (contactTitle) {
-        contactTitle.innerHTML = `${translations[lang].getInTouch} <span class="text-accent">Touch</span>`;
-    }
-    
-    // Update work together button if on about page
-    const workBtn = document.querySelector('#contact .connect-btn');
-    if (workBtn && !workBtn.querySelector('.accent-dot')) {
-        workBtn.textContent = translations[lang].letsWork;
-    }
-}
-
-// Load saved language preference
-document.addEventListener('DOMContentLoaded', () => {
-    const savedLang = localStorage.getItem('language') || 'en';
-    
-    // Set active option
-    if (languageOptions && languageOptions.length > 0) {
-        languageOptions.forEach(option => {
-            if (option.getAttribute('data-lang') === savedLang) {
-                option.classList.add('active');
-                if (currentLang) {
-                    currentLang.textContent = option.textContent;
-                }
-            } else {
-                option.classList.remove('active');
-            }
+      };
+      
+      macLinks.addEventListener('mousemove', applyMagnification);
+      macLinks.addEventListener('mouseleave', () => {
+        Array.from(macLinks.querySelectorAll('.nav-link')).forEach(link => {
+          link.style.transform = 'scale(1)';
+          
+          const icon = link.querySelector('.nav-link-icon');
+          if (icon) {
+            icon.style.transform = 'scale(1)';
+          }
+          
+          const text = link.querySelector('span');
+          if (text) {
+            text.style.opacity = '0.8';
+            text.style.fontWeight = 'normal';
+          }
         });
+      });
+      
+      // Replace the original nav-links with our mac links
+      navLinks.parentNode.replaceChild(macLinks, navLinks);
     }
     
-    // Update content
-    updateLanguage(savedLang);
-});
-
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href !== "#") {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
+    // Add padding to the top of the page to account for fixed header
+    document.body.style.paddingTop = `${header.offsetHeight}px`;
+    
+    // Show/hide logic for the navbar (hide on scroll down, show on scroll up)
+    let lastScrollY = window.scrollY;
+    let isVisible = true;
+    
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      
+      // Don't hide when at the top of page
+      if (currentScrollY < 50) {
+        if (!isVisible) {
+          header.style.transform = 'translateY(0)';
+          isVisible = true;
         }
+        return;
+      }
+      
+      // Otherwise, hide on scroll down, show on scroll up
+      if (currentScrollY > lastScrollY && isVisible) {
+        header.style.transform = 'translateY(-100%)';
+        isVisible = false;
+      } else if (currentScrollY < lastScrollY && !isVisible) {
+        header.style.transform = 'translateY(0)';
+        isVisible = true;
+      }
+      
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+    
+    // Handle hover effect for showing the navbar when it's hidden
+    const navbarSensor = document.createElement('div');
+    navbarSensor.style.position = 'fixed';
+    navbarSensor.style.top = '0';
+    navbarSensor.style.left = '0';
+    navbarSensor.style.width = '100%';
+    navbarSensor.style.height = '20px';
+    navbarSensor.style.zIndex = '999';
+    document.body.appendChild(navbarSensor);
+    
+    navbarSensor.addEventListener('mouseenter', () => {
+      if (!isVisible) {
+        header.style.transform = 'translateY(0)';
+        isVisible = true;
+      }
     });
-});
+    
+    // Handle window resize to update dimensions
+    window.addEventListener('resize', () => {
+      document.body.style.paddingTop = `${header.offsetHeight}px`;
+    });
+  });

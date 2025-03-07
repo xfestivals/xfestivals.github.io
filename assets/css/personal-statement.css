@@ -1,0 +1,257 @@
+.personal-statement-section {
+    padding: 100px 0;
+    background-color: rgba(49, 130, 246, 0.03);
+  }
+  
+  .statement-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .statement-container.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .statement-header {
+    background: linear-gradient(45deg, var(--accent-color), #2563EB);
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .statement-icon {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  
+  .statement-icon svg {
+    width: 30px;
+    height: 30px;
+    stroke-width: 2;
+  }
+  
+  .statement-title {
+    color: white;
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0;
+  }
+  
+  .statement-content {
+    padding: 40px;
+  }
+  
+  .statement-quote {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background-color: rgba(49, 130, 246, 0.05);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-left: 4px solid var(--accent-color);
+  }
+  
+  .statement-quote svg {
+    width: 30px;
+    height: 30px;
+    stroke-width: 1.5;
+    color: var(--accent-color);
+    flex-shrink: 0;
+  }
+  
+  .statement-quote blockquote {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.6;
+    font-style: italic;
+  }
+  
+  .statement-content p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+  }
+  
+  .statement-vision {
+    margin: 40px 0;
+    background-color: rgba(49, 130, 246, 0.05);
+    border-radius: 12px;
+    padding: 30px;
+  }
+  
+  .statement-vision h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--accent-color);
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  .statement-vision h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--accent-color);
+    border-radius: 3px;
+  }
+  
+  .statement-vision ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .statement-vision li {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .vision-marker {
+    width: 30px;
+    height: 30px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  
+  .vision-content {
+    flex: 1;
+  }
+  
+  .vision-content h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+  
+  .vision-content p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  
+  .statement-signature {
+    margin-top: 40px;
+    text-align: right;
+  }
+  
+  .statement-signature p {
+    margin: 0 0 5px;
+    font-style: italic;
+    opacity: 0.8;
+  }
+  
+  .signature-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent-color);
+    font-family: 'Brush Script MT', cursive;
+  }
+  
+  /* 반응형 스타일 */
+  @media (max-width: 768px) {
+    .statement-header {
+      padding: 30px;
+    }
+    
+    .statement-icon {
+      width: 50px;
+      height: 50px;
+    }
+    
+    .statement-icon svg {
+      width: 25px;
+      height: 25px;
+    }
+    
+    .statement-title {
+      font-size: 24px;
+    }
+    
+    .statement-content {
+      padding: 30px;
+    }
+    
+    .statement-quote {
+      padding: 20px;
+    }
+    
+    .statement-quote blockquote {
+      font-size: 16px;
+    }
+    
+    .statement-vision {
+      padding: 25px;
+    }
+    
+    .vision-marker {
+      width: 25px;
+      height: 25px;
+      font-size: 14px;
+    }
+    
+    .vision-content h4 {
+      font-size: 16px;
+    }
+    
+    .vision-content p {
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .statement-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+      padding: 25px;
+    }
+    
+    .statement-content {
+      padding: 25px;
+    }
+    
+    .statement-quote {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .statement-vision li {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .vision-marker {
+      margin-bottom: 5px;
+    }
+  }

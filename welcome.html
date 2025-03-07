@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Y's Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        :root {
+            --bg-color: #1e2021;
+            --text-color: #ffffff;
+            --accent-color: #3182F6;
+            --secondary-accent: #02C9B0;
+            --highlight-color: #ffd166;
+            --card-bg: #121212;
+        }
+
+        body {
+            background-color: #121212; /* 어두운 배경색 */
+            color: var(--text-color);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 글래스 모피즘 효과를 위한 배경 */
+        .background-blur {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .blur-circle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(49, 130, 246, 0.2) 0%, rgba(49, 130, 246, 0) 70%);
+            border-radius: 50%;
+        }
+
+        .blur-circle:nth-child(1) {
+            width: 60vw;
+            height: 60vw;
+            top: -20vh;
+            left: -10vw;
+            opacity: 0.4;
+        }
+
+        .blur-circle:nth-child(2) {
+            width: 50vw;
+            height: 50vw;
+            bottom: -15vh;
+            right: -10vw;
+            opacity: 0.3;
+            background: radial-gradient(circle, rgba(2, 201, 176, 0.2) 0%, rgba(2, 201, 176, 0) 70%);
+        }
+
+        .blur-circle:nth-child(3) {
+            width: 40vw;
+            height: 40vw;
+            top: 40vh;
+            left: 30vw;
+            opacity: 0.2;
+            background: radial-gradient(circle, rgba(255, 209, 102, 0.15) 0%, rgba(255, 209, 102, 0) 70%);
+        }
+
+        .greeting-container {
+            text-align: center;
+            position: relative;
+            min-height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Initial blinking cursor on empty screen */
+        .cursor-only {
+            display: inline-block;
+            height: 80px;
+            border-right: 3px solid var(--text-color);
+            animation: cursor-blink 0.7s step-end infinite;
+        }
+        
+        /* Typing cursor effect */
+        .typing-text {
+            font-size: 70px;
+            font-weight: 800;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid var(--text-color);
+            animation: cursor-blink 0.7s step-end infinite;
+            width: 0;
+        }
+        
+        @keyframes cursor-blink {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--text-color); }
+        }
+        
+        /* Regular greetings after typing */
+        .greeting {
+            font-size: 70px;
+            font-weight: 800;
+            opacity: 0;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            display: none; /* Hide all by default */
+            color: var(--text-color); /* All greetings in white */
+        }
+
+        .greeting.active {
+            opacity: 1;
+            display: block;
+        }
+
+        /* Main content for slide up transition */
+        .main-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--bg-color);
+            transition: top 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 10;
+        }
+
+        .main-content.slide-up {
+            top: 0;
+        }
+
+        /* Skip button */
+        .skip-button {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+            z-index: 20;
+        }
+
+        .skip-button:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            opacity: 1;
+        }
+
+        /* Loader circle */
+        .loader-circle {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--accent-color);
+            border-radius: 50%;
+            animation: loader-spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 15;
+        }
+
+        @keyframes loader-spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 글래스 모피즘 효과를 위한 배경 -->
+    <div class="background-blur">
+        <div class="blur-circle"></div>
+        <div class="blur-circle"></div>
+        <div class="blur-circle"></div>
+    </div>
+
+    <div class="greeting-container">
+        <!-- Initial blinking cursor -->
+        <div class="cursor-only"></div>
+        
+        <!-- This will be filled with typing effect -->
+        <div class="typing-text"></div>
+        
+        <!-- These greetings will appear after typing effect -->
+        <div class="greeting" data-lang="es">Hola</div>
+        <div class="greeting" data-lang="fr">Bonjour</div>
+        <div class="greeting" data-lang="de">Hallo</div>
+        <div class="greeting" data-lang="it">Ciao</div>
+        <div class="greeting" data-lang="zh">你好</div>
+        <div class="greeting" data-lang="ar">مرحبا</div>
+        <div class="greeting" data-lang="ko">안녕하세요</div>
+    </div>
+
+    <div class="main-content">
+        <!-- This will be loaded with index.html content -->
+    </div>
+
+    <div class="loader-circle"></div>
+    <button class="skip-button">Skip Intro</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursorOnly = document.querySelector('.cursor-only');
+            const typingText = document.querySelector('.typing-text');
+            const greetings = document.querySelectorAll('.greeting');
+            const skipButton = document.querySelector('.skip-button');
+            const loaderCircle = document.querySelector('.loader-circle');
+            const mainContent = document.querySelector('.main-content');
+            const textToType = "Hello";
+            let charIndex = 0;
+            
+            // Load the index.html content for transition
+            try {
+                fetch('index.html')
+                    .then(response => response.text())
+                    .then(html => {
+                        // Create a temp element to hold the HTML content
+                        const tempElement = document.createElement('div');
+                        tempElement.innerHTML = html;
+                        
+                        // Extract the body content
+                        const bodyContent = tempElement.querySelector('body').innerHTML;
+                        mainContent.innerHTML = bodyContent;
+                    })
+                    .catch(error => {
+                        console.log('Could not preload index.html content');
+                    });
+            } catch (e) {
+                console.log('Fetch attempt failed, skipping preload');
+            }
+            
+            // Show initial blinking cursor for 1 second before typing starts
+            setTimeout(() => {
+                // Hide initial cursor
+                cursorOnly.style.display = 'none';
+                
+                // Show typing element and start typing
+                typingText.style.display = 'block';
+                typeText();
+            }, 1000);
+            
+            // Function to simulate typing
+            function typeText() {
+                if (charIndex < textToType.length) {
+                    typingText.textContent += textToType.charAt(charIndex);
+                    charIndex++;
+                    
+                    // Adjust width of typing element to match content
+                    typingText.style.width = typingText.textContent.length + 'ch';
+                    
+                    // Continue typing with slower speed
+                    const randomDelay = Math.floor(Math.random() * 70) + 150; // Between 150-220ms
+                    setTimeout(typeText, randomDelay);
+                } else {
+                    // Typing finished, remove cursor after short pause
+                    setTimeout(() => {
+                        typingText.style.borderRight = "none";
+                        
+                        // Start showing other greetings immediately
+                        typingText.style.display = 'none';
+                        showGreetings();
+                    }, 500);
+                }
+            }
+            
+            // Function to show the remaining greetings one by one
+            function showGreetings() {
+                let currentIndex = 0;
+                
+                function nextGreeting() {
+                    // Hide current greeting if any is shown
+                    if (currentIndex > 0) {
+                        greetings[currentIndex - 1].style.display = 'none';
+                        greetings[currentIndex - 1].classList.remove('active');
+                    }
+                    
+                    if (currentIndex < greetings.length) {
+                        // Show next greeting immediately
+                        greetings[currentIndex].style.display = 'block';
+                        greetings[currentIndex].classList.add('active');
+                        
+                        currentIndex++;
+                        
+                        // Schedule next greeting change (much faster)
+                        setTimeout(nextGreeting, 200);
+                    } else {
+                        // All greetings shown, show slide up transition
+                        skipButton.style.display = 'none';
+                        loaderCircle.style.display = 'block';
+                        
+                        setTimeout(() => {
+                            // Slide up animation
+                            mainContent.classList.add('slide-up');
+                            
+                            // After animation is complete, redirect to index.html
+                            setTimeout(() => {
+                                window.location.href = 'index.html';
+                            }, 800);
+                        }, 400);
+                    }
+                }
+                
+                // Start the sequence
+                nextGreeting();
+            }
+            
+            // Skip animation if user clicks the skip button
+            skipButton.addEventListener('click', function() {
+                skipButton.style.display = 'none';
+                loaderCircle.style.display = 'block';
+                
+                setTimeout(() => {
+                    // Slide up animation
+                    mainContent.classList.add('slide-up');
+                    
+                    // After animation is complete, redirect to index.html
+                    setTimeout(() => {
+                        // 원래 파일명 유지
+                        window.location.href = 'index.html';
+                    }, 800);
+                }, 400);
+            });
+
+            // 브라우저 뒤로가기 방지 (보안 에러 해결)
+            // history.replaceState(null, document.title, 'index.html');
+            
+            // URL 파라미터로 웰컴 화면 방문 표시 - 제거 (보안 에러 해결)
+            // const urlParams = new URLSearchParams(window.location.search);
+            // if (!urlParams.has('visited')) {
+            //     urlParams.append('visited', 'true');
+            //     // 현재 URL 유지하면서 파라미터만 추가
+            //     const newUrl = window.location.pathname + '?' + urlParams.toString();
+            //     window.history.replaceState(null, document.title, newUrl);
+            // }
+        });
+    </script>
+</body>
+</html>
