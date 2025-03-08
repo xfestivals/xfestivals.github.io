@@ -1,0 +1,486 @@
+/* 미니멀 향상 CSS - 웹사이트의 미적인 디자인과 사용성 향상 */
+
+/* 기본 애니메이션 정의 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  /* 섹션 진입 애니메이션 */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
+  
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* 페이지 로드 애니메이션 */
+  .fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  
+  /* 지연 애니메이션 클래스 */
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; }
+  
+  /* 마우스 오버 효과 개선 */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 미묘한 클릭 효과 */
+  .click-effect {
+    transition: transform 0.1s ease, opacity 0.1s ease;
+  }
+  
+  .click-effect:active {
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+  
+  /* 부드러운 카드 그림자 효과 */
+  .card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* 포커스 효과 개선 */
+  button:focus, a:focus, input:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(49, 130, 246, 0.3);
+  }
+  
+  /* 손가락 커서 */
+  .clickable {
+    cursor: pointer;
+  }
+  
+  /* 텍스트 선택 스타일 */
+  ::selection {
+    background-color: rgba(49, 130, 246, 0.2);
+    color: var(--text-color);
+  }
+  
+  /* 이미지 로드 애니메이션 */
+  img.lazy-load {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  
+  img.lazy-load.loaded {
+    opacity: 1;
+  }
+  
+  /* 배경 그라데이션 */
+  .gradient-bg {
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--secondary-accent) 100%);
+    color: white;
+  }
+  
+  /* 유리형 효과 */
+  .glass-effect {
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 잔물결 효과 버튼 */
+  .ripple-btn {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .ripple-btn::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+  
+  .ripple-btn:active::after {
+    transform: scale(2);
+    opacity: 1;
+    transition: 0s;
+  }
+  
+  /* 둥근 모서리 유틸리티 클래스 */
+  .rounded-sm { border-radius: 4px; }
+  .rounded-md { border-radius: 8px; }
+  .rounded-lg { border-radius: 16px; }
+  .rounded-xl { border-radius: 24px; }
+  .rounded-full { border-radius: 9999px; }
+  
+  /* 텍스트 그림자 */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 프로젝트 카드 이미지 특수 효과 */
+  .project-image-effect {
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .project-image-effect img {
+    transition: transform 0.5s ease;
+  }
+  
+  .project-image-effect:hover img {
+    transform: scale(1.05);
+  }
+  
+  .project-image-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.5));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .project-image-effect:hover::after {
+    opacity: 1;
+  }
+  
+  /* 간단한 로딩 스피너 */
+  .spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--accent-color);
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* 그림자 효과 클래스 */
+  .shadow-sm { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); }
+  .shadow-md { box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+  .shadow-lg { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+  .shadow-xl { box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); }
+  
+  /* 기울기 호버 효과 */
+  .tilt-effect {
+    transition: transform 0.3s ease;
+  }
+  
+  .tilt-effect:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(5deg);
+  }
+  
+  /* 카드 호버 효과 */
+  .card-hover {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--accent-color);
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-hover:hover::before {
+    opacity: 0.05;
+    transform: scale(1);
+  }
+  
+  /* 포커스 없음 */
+  .no-focus {
+    outline: none;
+  }
+  
+  .no-focus:focus {
+    box-shadow: none;
+  }
+  
+  /* 부드러운 전환 */
+  .smooth-transition {
+    transition: all 0.3s ease;
+  }
+  
+  /* 타이포그래피 향상 */
+  .title-accent {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .title-accent::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--accent-color);
+    border-radius: 3px;
+  }
+  
+  /* 이미지 마스크 효과 */
+  .img-mask {
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+  }
+  
+  /* 아이콘 컨테이너 */
+  .icon-container {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(49, 130, 246, 0.1);
+    color: var(--accent-color);
+    transition: all 0.3s ease;
+  }
+  
+  .icon-container:hover {
+    background-color: var(--accent-color);
+    color: white;
+    transform: scale(1.1);
+  }
+  
+  /* 네비게이션 링크 호버 효과 */
+  .nav-link {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+  
+  /* 배지 펄스 효과 */
+  .badge-pulse {
+    animation: pulse 2s infinite;
+  }
+  
+  /* 스킬 아이템 호버 효과 */
+  .skill-item {
+    transition: all 0.3s ease;
+  }
+  
+  .skill-item:hover {
+    transform: translateX(5px);
+    color: var(--accent-color);
+  }
+  
+  /* 프로젝트 카드 호버 효과 */
+  .project-card {
+    transition: all 0.3s ease;
+  }
+  
+  .project-card:hover .project-title {
+    color: var(--accent-color);
+  }
+  
+  /* 타임라인 도트 효과 */
+  .timeline-dot {
+    position: relative;
+  }
+  
+  .timeline-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background-color: rgba(49, 130, 246, 0.2);
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .timeline-item:hover .timeline-dot::before {
+    opacity: 1;
+    animation: pulse 2s infinite;
+  }
+  
+  /* 섹션 타이틀 강조 효과 */
+  .section-title .text-accent {
+    position: relative;
+  }
+  
+  .section-title .text-accent::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  
+  .section-title:hover .text-accent::after {
+    transform: scaleX(1);
+  }
+  
+  /* 스크롤바 스타일 개선 */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent-color);
+  }
+  
+  /* 앱 로고 애니메이션 */
+  .logo-circle {
+    transition: all 0.3s ease;
+  }
+  
+  .logo:hover .logo-circle {
+    transform: rotate(360deg);
+    background-color: var(--accent-color);
+    color: white;
+  }
+  
+  /* 방문자 가이드 팁 스타일 */
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  /* 박스 효과 */
+  .box-effect {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
+  }
+  
+  .box-effect:hover {
+    border-color: var(--accent-color);
+    background-color: rgba(49, 130, 246, 0.05);
+  }
+  
+  /* 헤더 스크롤 효과 */
+  header.scrolled {
+    background-color: rgba(18, 18, 18, 0.9);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* 페이지 전환 효과 */
+  .page-transition {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  /* 미니멀한 로더 스타일 */
+  .minimal-loader {
+    width: 30px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, var(--accent-color) 50%, transparent 100%);
+    animation: loading 1.5s infinite;
+    border-radius: 3px;
+  }
+  
+  @keyframes loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }

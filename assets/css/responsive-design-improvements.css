@@ -1,0 +1,247 @@
+/* 반응형 디자인 개선 CSS */
+
+/* 반응형 컨테이너 */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* 뷰포트 크기별 타이포그래피 - 유동적인 폰트 크기 */
+  :root {
+    --h1-font-size: clamp(2.5rem, 5vw, 5.5rem); /* 타이틀 */
+    --h2-font-size: clamp(2rem, 3vw, 2.5rem);   /* 섹션 제목 */
+    --h3-font-size: clamp(1.3rem, 2vw, 1.5rem); /* 작은 제목 */
+    --body-font-size: clamp(1rem, 1.2vw, 1.1rem); /* 본문 */
+    --small-font-size: clamp(0.8rem, 1vw, 0.9rem); /* 작은 텍스트 */
+  }
+  
+  /* 기본 타이포그래피 적용 */
+  .title-large {
+    font-size: var(--h1-font-size);
+  }
+  
+  .section-title {
+    font-size: var(--h2-font-size);
+  }
+  
+  .about-content h2,
+  .timeline-title,
+  .education-degree {
+    font-size: var(--h3-font-size);
+  }
+  
+  p, .about-text {
+    font-size: var(--body-font-size);
+  }
+  
+  .small-text, .location, .footer-tagline {
+    font-size: var(--small-font-size);
+  }
+  
+  /* 그리드 시스템 개선 */
+  .flex-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  
+  .flex-grid-item {
+    flex: 1;
+    min-width: 280px; /* 최소 너비 설정으로 너무 작아지지 않도록 */
+  }
+  
+  /* 이미지 반응형 처리 */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* 모바일 최적화 - 더 작은 패딩과 여백 */
+  @media (max-width: 768px) {
+    section {
+      padding: 60px 0; /* 더 작은 섹션 패딩 */
+    }
+    
+    .container {
+      padding: 0 15px; /* 더 작은 컨테이너 패딩 */
+    }
+    
+    .about-grid,
+    .skills-categories,
+    .education-cards,
+    .contact-cards,
+    .projects-grid {
+      gap: 20px; /* 더 작은 그리드 갭 */
+    }
+  }
+  
+  /* 세로 화면 최적화 - 배너 영역 조정 */
+  @media (max-aspect-ratio: 1/1) and (max-width: 768px) {
+    .hero {
+      min-height: 90vh;
+      padding-top: 80px;
+    }
+    
+    .intro-container {
+      margin-bottom: 30px;
+    }
+    
+    .title-large {
+      margin-bottom: 20px;
+    }
+    
+    .badges {
+      margin: 15px 0 20px;
+    }
+    
+    .tagline {
+      margin-bottom: 30px;
+    }
+  }
+  
+  /* 초소형 모바일 디바이스 최적화 */
+  @media (max-width: 360px) {
+    .title-large {
+      font-size: clamp(2rem, 8vw, 2.5rem);
+    }
+    
+    .badges {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .connect-btn {
+      width: 100%;
+      padding: 12px 20px;
+      font-size: 14px;
+    }
+  }
+  
+  /* 네비게이션 반응형 개선 */
+  @media (max-width: 992px) {
+    header nav {
+      padding: 12px 0;
+    }
+    
+    .logo-circle {
+      width: 36px;
+      height: 36px;
+      font-size: 16px;
+    }
+  }
+  
+  /* 스크롤 네비게이션 반응형 처리 */
+  @media (max-width: 768px) {
+    .scroll-nav {
+      right: 10px;
+    }
+    
+    .scroll-nav-dot {
+      width: 8px;
+      height: 8px;
+    }
+  }
+  
+  /* 화면 방향 전환 대응 (가로 → 세로) */
+  @media (orientation: portrait) {
+    .about-grid,
+    .featured-project {
+      grid-template-columns: 1fr;
+    }
+    
+    .about-image {
+      max-height: 350px;
+      overflow: hidden;
+    }
+  }
+  
+  /* 화면 방향 전환 대응 (세로 → 가로) */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .hero {
+      padding: 100px 0 50px;
+      min-height: auto;
+    }
+    
+    .title-large {
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+    
+    .section-title {
+      margin-bottom: 30px;
+    }
+  }
+  
+  /* 그리드 아이템 최소 너비 설정 */
+  .skills-category,
+  .education-card,
+  .contact-card,
+  .project-card {
+    min-width: 280px;
+  }
+  
+  /* 테이블 반응형 처리 */
+  table {
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    table.responsive {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+  
+  /* 버튼 그룹 반응형 처리 */
+  .button-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  @media (max-width: 480px) {
+    .button-group {
+      flex-direction: column;
+    }
+    
+    .button-group .connect-btn,
+    .button-group .outline-btn {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+  
+  /* 요소 간격 자동 조정 */
+  .auto-space > * + * {
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .auto-space > * + * {
+      margin-top: 15px;
+    }
+  }
+  
+  /* 접근성 추가 - 모바일에서 터치 영역 확대 */
+  @media (max-width: 768px) {
+    .nav-link,
+    .mobile-nav-link,
+    .contact-link,
+    button {
+      min-height: 44px; /* 최소 44px의 터치 영역 */
+      display: flex;
+      align-items: center;
+    }
+    
+    .palette-option,
+    .mobile-palette-option {
+      width: 30px;
+      height: 30px;
+    }
+  }

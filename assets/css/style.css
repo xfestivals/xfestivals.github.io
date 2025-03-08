@@ -1,6 +1,6 @@
 /* 기본 색상 변수 */
 :root {
-    --bg-color: #1e2021;
+    --bg-color: #0a0a0a;
     --text-color: #ffffff;
     --accent-color: #3182F6; /* 기존 파란색 */
     --secondary-accent: #02C9B0;
@@ -842,6 +842,7 @@ footer {
 .nav-link:hover span {
     font-weight: bold;
 }
+
 
 /* 반응형 스타일 */
 @media (max-width: 992px) {

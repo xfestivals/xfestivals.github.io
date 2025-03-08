@@ -1,0 +1,428 @@
+/* 네비게이션 바 스타일 */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    background-color: var(--nav-bg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    width: 100%;
+    position: relative;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 700;
+    z-index: 10;
+  }
+  
+  .logo-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-weight: 700;
+    font-size: 18px;
+    transition: all 0.3s ease;
+  }
+  
+  .logo:hover .logo-circle {
+    transform: rotate(360deg);
+    background-color: var(--accent-color);
+    color: white;
+  }
+  
+  /* 중앙 정렬 네비게이션 */
+  .nav-links-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    transition: color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .nav-link:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+  }
+  
+  .nav-link.active {
+    color: var(--accent-color);
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+  
+  .nav-link-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s ease;
+  }
+  
+  .nav-link:hover .nav-link-icon {
+    transform: scale(1.1);
+  }
+  
+  /* 오른쪽 컨트롤 영역 */
+  .right-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  /* 테마 선택기 스타일 */
+  .theme-selector {
+    position: relative;
+  }
+  
+  .theme-menu-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 40px;
+    color: var(--text-color);
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .theme-menu-btn:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+  }
+  
+  .theme-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    padding: 10px 0;
+    min-width: 170px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+  }
+  
+  .theme-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .theme-option {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .theme-option:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .theme-option.active {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .color-preview {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+  }
+  
+  /* 테마별 강조색 */
+  .theme-blue .theme-menu-btn:hover {
+    background-color: #3182F6;
+    border-color: #3182F6;
+  }
+  
+  .theme-purple .theme-menu-btn:hover {
+    background-color: #9D4EDD;
+    border-color: #9D4EDD;
+  }
+  
+  .theme-pink .theme-menu-btn:hover {
+    background-color: #F72585;
+    border-color: #F72585;
+  }
+  
+  .theme-yellow .theme-menu-btn:hover {
+    background-color: #FFBE0B;
+    border-color: #FFBE0B;
+  }
+  
+  .theme-green .theme-menu-btn:hover {
+    background-color: #38B000;
+    border-color: #38B000;
+  }
+  
+  /* 언어 선택기 */
+  .language-selector {
+    position: relative;
+  }
+  
+  .language-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 40px;
+    color: var(--text-color);
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .language-btn:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+  }
+  
+  .language-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    padding: 10px 0;
+    min-width: 150px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+  }
+  
+  .language-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .language-option {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .language-option:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .language-option.active {
+    color: var(--accent-color);
+    font-weight: 600;
+  }
+  
+  /* 모바일 메뉴 토글 */
+  .mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  
+  /* 모바일 메뉴 */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--card-bg);
+    z-index: 1000;
+    transition: right 0.3s ease;
+    padding: 80px 30px 30px;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+  }
+  
+  .mobile-menu.show {
+    right: 0;
+  }
+  
+  .mobile-menu-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .mobile-nav-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: color 0.3s ease;
+  }
+  
+  .mobile-nav-link:hover, 
+  .mobile-nav-link.active {
+    color: var(--accent-color);
+  }
+  
+  .mobile-menu-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .mobile-menu-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .mobile-language-options,
+  .mobile-palette-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .mobile-language-option {
+    padding: 8px 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .mobile-language-option:hover,
+  .mobile-language-option.active {
+    background-color: var(--accent-color);
+    color: white;
+  }
+  
+  .mobile-palette-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border: 2px solid transparent;
+  }
+  
+  .mobile-palette-option:hover {
+    transform: scale(1.1);
+  }
+  
+  .mobile-palette-option.active {
+    border-color: white;
+  }
+  
+  /* 오버레이 */
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .menu-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* 반응형 디자인 */
+  @media (max-width: 992px) {
+    .mobile-menu-toggle {
+      display: block;
+    }
+    
+    .nav-links-container, 
+    .theme-selector,
+    .language-selector {
+      display: none;
+    }
+    
+    header nav {
+      justify-content: space-between;
+    }
+  }

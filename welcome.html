@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Prevent caching to ensure welcome page always loads -->
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Welcome to Y's Portfolio</title>
     <style>
         * {
@@ -94,8 +98,8 @@
         
         /* Typing cursor effect */
         .typing-text {
-            font-size: 70px;
-            font-weight: 800;
+            font-size: 60px;
+            font-weight: 500;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
@@ -113,8 +117,8 @@
         
         /* Regular greetings after typing */
         .greeting {
-            font-size: 70px;
-            font-weight: 800;
+            font-size: 60px;
+            font-weight: 500;
             opacity: 0;
             position: absolute;
             left: 50%;
@@ -127,22 +131,6 @@
         .greeting.active {
             opacity: 1;
             display: block;
-        }
-
-        /* Main content for slide up transition */
-        .main-content {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: var(--bg-color);
-            transition: top 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-            z-index: 10;
-        }
-
-        .main-content.slide-up {
-            top: 0;
         }
 
         /* Skip button */
@@ -169,27 +157,6 @@
             border-color: var(--accent-color);
             opacity: 1;
         }
-
-        /* Loader circle */
-        .loader-circle {
-            display: none;
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid var(--accent-color);
-            border-radius: 50%;
-            animation: loader-spin 1s linear infinite;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 15;
-        }
-
-        @keyframes loader-spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
     </style>
 </head>
 <body>
@@ -207,157 +174,105 @@
         <!-- This will be filled with typing effect -->
         <div class="typing-text"></div>
         
-        <!-- These greetings will appear after typing effect -->
+        <!-- 15개 언어 인사말 -->
+        <div class="greeting" data-lang="en">Hello</div>
+        <div class="greeting" data-lang="zh">你好</div>
+        <div class="greeting" data-lang="hi">नमस्ते</div>
         <div class="greeting" data-lang="es">Hola</div>
         <div class="greeting" data-lang="fr">Bonjour</div>
-        <div class="greeting" data-lang="de">Hallo</div>
-        <div class="greeting" data-lang="it">Ciao</div>
-        <div class="greeting" data-lang="zh">你好</div>
         <div class="greeting" data-lang="ar">مرحبا</div>
+        <div class="greeting" data-lang="bn">স্বাগতম</div>
+        <div class="greeting" data-lang="ru">Привет</div>
+        <div class="greeting" data-lang="pt">Olá</div>
+        <div class="greeting" data-lang="id">Halo</div>
+        <div class="greeting" data-lang="ja">こんにちは</div>
+        <div class="greeting" data-lang="de">Hallo</div>
         <div class="greeting" data-lang="ko">안녕하세요</div>
+        <div class="greeting" data-lang="tr">Merhaba</div>
+        <div class="greeting" data-lang="it">Ciao</div>
     </div>
 
-    <div class="main-content">
-        <!-- This will be loaded with index.html content -->
-    </div>
-
-    <div class="loader-circle"></div>
     <button class="skip-button">Skip Intro</button>
 
     <script>
+        // DOM 요소 선택
+        const cursorOnly = document.querySelector('.cursor-only');
+        const typingText = document.querySelector('.typing-text');
+        const greetings = document.querySelectorAll('.greeting');
+        const skipButton = document.querySelector('.skip-button');
+        const textToType = "Hello";
+        let charIndex = 0;
+        
+        // 페이지 로드 시 실행
         document.addEventListener('DOMContentLoaded', function() {
-            const cursorOnly = document.querySelector('.cursor-only');
-            const typingText = document.querySelector('.typing-text');
-            const greetings = document.querySelectorAll('.greeting');
-            const skipButton = document.querySelector('.skip-button');
-            const loaderCircle = document.querySelector('.loader-circle');
-            const mainContent = document.querySelector('.main-content');
-            const textToType = "Hello";
-            let charIndex = 0;
-            
-            // Load the index.html content for transition
-            try {
-                fetch('index.html')
-                    .then(response => response.text())
-                    .then(html => {
-                        // Create a temp element to hold the HTML content
-                        const tempElement = document.createElement('div');
-                        tempElement.innerHTML = html;
-                        
-                        // Extract the body content
-                        const bodyContent = tempElement.querySelector('body').innerHTML;
-                        mainContent.innerHTML = bodyContent;
-                    })
-                    .catch(error => {
-                        console.log('Could not preload index.html content');
-                    });
-            } catch (e) {
-                console.log('Fetch attempt failed, skipping preload');
-            }
-            
-            // Show initial blinking cursor for 1 second before typing starts
+            // 초기 깜빡이는 커서 표시 후 타이핑 시작
             setTimeout(() => {
-                // Hide initial cursor
                 cursorOnly.style.display = 'none';
-                
-                // Show typing element and start typing
                 typingText.style.display = 'block';
                 typeText();
             }, 1000);
+        });
+        
+        // 타이핑 효과 구현
+        function typeText() {
+            if (charIndex < textToType.length) {
+                typingText.textContent += textToType.charAt(charIndex);
+                charIndex++;
+                
+                // 타이핑된 텍스트 너비 조정
+                typingText.style.width = typingText.textContent.length + 'ch';
+                
+                // 다음 글자 타이핑 (랜덤 딜레이로 자연스럽게)
+                const randomDelay = Math.floor(Math.random() * 70) + 150; // 150-220ms
+                setTimeout(typeText, randomDelay);
+            } else {
+                // 타이핑 완료 후 잠시 대기
+                setTimeout(() => {
+                    typingText.style.borderRight = "none";
+                    typingText.style.display = 'none';
+                    showGreetings();
+                }, 500);
+            }
+        }
+        
+        // 다국어 인사말 표시
+        function showGreetings() {
+            let currentIndex = 0;
             
-            // Function to simulate typing
-            function typeText() {
-                if (charIndex < textToType.length) {
-                    typingText.textContent += textToType.charAt(charIndex);
-                    charIndex++;
+            function nextGreeting() {
+                // 현재 표시 중인 인사말 숨기기
+                if (currentIndex > 0) {
+                    greetings[currentIndex - 1].style.display = 'none';
+                    greetings[currentIndex - 1].classList.remove('active');
+                }
+                
+                if (currentIndex < greetings.length) {
+                    // 다음 인사말 표시
+                    greetings[currentIndex].style.display = 'block';
+                    greetings[currentIndex].classList.add('active');
+                    currentIndex++;
                     
-                    // Adjust width of typing element to match content
-                    typingText.style.width = typingText.textContent.length + 'ch';
-                    
-                    // Continue typing with slower speed
-                    const randomDelay = Math.floor(Math.random() * 70) + 150; // Between 150-220ms
-                    setTimeout(typeText, randomDelay);
+                    // 15개 인사말을 2초 동안 표시 (각 133ms)
+                    setTimeout(nextGreeting, 133);
                 } else {
-                    // Typing finished, remove cursor after short pause
+                    // 모든 인사말 표시 완료, 메인 컨텐츠로 전환
+                    skipButton.style.display = 'none';
+                    
+                    // 애니메이션 완료 후 main.html로 리디렉션
                     setTimeout(() => {
-                        typingText.style.borderRight = "none";
-                        
-                        // Start showing other greetings immediately
-                        typingText.style.display = 'none';
-                        showGreetings();
+                        window.location.href = 'main.html';
                     }, 500);
                 }
             }
             
-            // Function to show the remaining greetings one by one
-            function showGreetings() {
-                let currentIndex = 0;
-                
-                function nextGreeting() {
-                    // Hide current greeting if any is shown
-                    if (currentIndex > 0) {
-                        greetings[currentIndex - 1].style.display = 'none';
-                        greetings[currentIndex - 1].classList.remove('active');
-                    }
-                    
-                    if (currentIndex < greetings.length) {
-                        // Show next greeting immediately
-                        greetings[currentIndex].style.display = 'block';
-                        greetings[currentIndex].classList.add('active');
-                        
-                        currentIndex++;
-                        
-                        // Schedule next greeting change (much faster)
-                        setTimeout(nextGreeting, 200);
-                    } else {
-                        // All greetings shown, show slide up transition
-                        skipButton.style.display = 'none';
-                        loaderCircle.style.display = 'block';
-                        
-                        setTimeout(() => {
-                            // Slide up animation
-                            mainContent.classList.add('slide-up');
-                            
-                            // After animation is complete, redirect to index.html
-                            setTimeout(() => {
-                                window.location.href = 'index.html';
-                            }, 800);
-                        }, 400);
-                    }
-                }
-                
-                // Start the sequence
-                nextGreeting();
-            }
-            
-            // Skip animation if user clicks the skip button
-            skipButton.addEventListener('click', function() {
-                skipButton.style.display = 'none';
-                loaderCircle.style.display = 'block';
-                
-                setTimeout(() => {
-                    // Slide up animation
-                    mainContent.classList.add('slide-up');
-                    
-                    // After animation is complete, redirect to index.html
-                    setTimeout(() => {
-                        // 원래 파일명 유지
-                        window.location.href = 'index.html';
-                    }, 800);
-                }, 400);
-            });
-
-            // 브라우저 뒤로가기 방지 (보안 에러 해결)
-            // history.replaceState(null, document.title, 'index.html');
-            
-            // URL 파라미터로 웰컴 화면 방문 표시 - 제거 (보안 에러 해결)
-            // const urlParams = new URLSearchParams(window.location.search);
-            // if (!urlParams.has('visited')) {
-            //     urlParams.append('visited', 'true');
-            //     // 현재 URL 유지하면서 파라미터만 추가
-            //     const newUrl = window.location.pathname + '?' + urlParams.toString();
-            //     window.history.replaceState(null, document.title, newUrl);
-            // }
+            // 인사말 시퀀스 시작
+            nextGreeting();
+        }
+        
+        // 스킵 버튼 클릭 시 인사말 건너뛰기
+        skipButton.addEventListener('click', function() {
+            skipButton.style.display = 'none';
+            window.location.href = 'main.html'; // 바로 이동
         });
     </script>
 </body>

@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- 브라우저가 이 페이지나 탐색 기록을 캐싱하지 않도록 방지 -->
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Y | Digital Experience Designer & Developer</title>
+    
+    <!-- 기본 CSS 파일 -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/navbar-styles.css">
+    <link rel="stylesheet" href="assets/css/about-styles.css">
+    <link rel="stylesheet" href="assets/css/minimal-enhancements.css">
+    
+    <!-- 테마 팔레트 CSS -->
+    <link rel="stylesheet" href="assets/css/theme-palette.css">
+
+    <!-- 반응형 디자인 개선 CSS -->
+    <link rel="stylesheet" href="assets/css/responsive-design-improvements.css">
+    
+    <!-- 아이콘 라이브러리 (Feather Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.css">
+    
+
+    <!-- Three.js 라이브러리 (추가) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- 컴포넌트 정의 스크립트 (추가) -->
+    <script src="assets/js/ThemeContext.js" defer></script>
+    <script src="assets/js/ThemeToggle.js" defer></script>
+    <script src="assets/js/Background3D.js" defer></script>
+    <script src="assets/js/AcademicAchievements.js" defer></script>
+    <script src="assets/js/AnimatedTimeline.js" defer></script>
+    <script src="assets/js/FilterableProjects.js" defer></script>
+    <script src="assets/js/GitHubStats.js" defer></script>
+    <script src="assets/js/PersonalStatement.js" defer></script>
+    <script src="assets/js/ProjectCarousel.js" defer></script>
+    <script src="assets/js/ResourcesSection.js" defer></script>
+    <script src="assets/js/SkillRadarChart.js" defer></script>
+
+    <!-- 기존 스크립트 (그대로 유지) -->
+    <script src="assets/js/script.js" defer></script>
+    <script src="assets/js/navbar-effect.js" defer></script>
+    <script src="assets/js/image-loader.js" defer></script>
+    <script src="assets/js/theme-palette-switcher.js" defer></script>
+
+    <!-- Feather Icons 초기화 (그대로 유지) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+        });
+    </script>
+
+    <!-- 페이지 트랜지션 효과 -->
+    <style>
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            background-color: #0a0a0a; /* Updated to match projects.html background */
+        }
+        body.loaded {
+            opacity: 1;
+        }
+        
+        /* 모든 섹션에 대한 배경색 일관성 유지 */
+        section {
+            background-color: #0a0a0a; /* Updated to match projects.html background */
+        }
+        
+        /* 특별한 배경색을 가진 섹션이 있다면 재정의 */
+        .skills-section, 
+        .education-section,
+        .experience-section {
+            background-color: #0a0a0a; /* Updated to match projects.html background */
+        }
+    </style>
+
+</head>
+<body class="theme-blue">
+    <header>
+        <div class="container">
+            <nav>
+                <a href="main.html" class="logo">
+                    <div class="logo-circle">Y</div>
+                </a>
+                
+                <!-- 중앙 정렬된 네비게이션 링크 컨테이너 -->
+                <div class="nav-links-container">
+                    <div class="nav-links">
+                        <a href="main.html" class="nav-link active">
+                            <svg class="nav-link-icon" fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+                            </svg>
+                            <span>Home</span>
+                        </a>
+                        <a href="projects.html" class="nav-link">
+                            <svg class="nav-link-icon" fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/>
+                            </svg>
+                            <span>Projects</span>
+                        </a>
+                        <a href="#contact" class="nav-link">
+                            <svg class="nav-link-icon" fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
+                            </svg>
+                            <span>Contact</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="right-controls">
+                    <!-- 테마 선택기 (메뉴 방식) -->
+                    <div class="theme-selector">
+                        <button id="themeBtn" class="theme-menu-btn">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"/>
+                                <path d="M12 17c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5z"/>
+                            </svg>
+                            <span>Theme</span>
+                        </button>
+                        <div class="theme-dropdown">
+                            <div class="theme-option theme-blue active" data-theme="theme-blue">
+                                <div class="color-preview" style="background-color: #3182F6;"></div>
+                                <span>Blue</span>
+                            </div>
+                            <div class="theme-option theme-purple" data-theme="theme-purple">
+                                <div class="color-preview" style="background-color: #9D4EDD;"></div>
+                                <span>Purple</span>
+                            </div>
+                            <div class="theme-option theme-pink" data-theme="theme-pink">
+                                <div class="color-preview" style="background-color: #F72585;"></div>
+                                <span>Pink</span>
+                            </div>
+                            <div class="theme-option theme-yellow" data-theme="theme-yellow">
+                                <div class="color-preview" style="background-color: #FFBE0B;"></div>
+                                <span>Yellow</span>
+                            </div>
+                            <div class="theme-option theme-green" data-theme="theme-green">
+                                <div class="color-preview" style="background-color: #38B000;"></div>
+                                <span>Green</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 언어 선택기 -->
+                    <div class="language-selector">
+                        <button id="languageBtn" class="language-btn">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+                            </svg>
+                            <span class="current-lang">English</span>
+                        </button>
+                        <div class="language-dropdown">
+                            <div class="language-option active" data-lang="en">English</div>
+                            <div class="language-option" data-lang="es">Español</div>
+                            <div class="language-option" data-lang="ko">한국어</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 모바일 메뉴 토글 버튼 -->
+                    <button class="mobile-menu-toggle">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 모바일 메뉴 -->
+    <div class="mobile-menu">
+        <button class="mobile-menu-close">
+            <i data-feather="x"></i>
+        </button>
+        
+        <div class="mobile-nav-links">
+            <a href="main.html" class="mobile-nav-link active">
+                <i data-feather="home"></i>
+                <span>Home</span>
+            </a>
+            <a href="projects.html" class="mobile-nav-link">
+                <i data-feather="folder"></i>
+                <span>Projects</span>
+            </a>
+            <a href="#contact" class="mobile-nav-link">
+                <i data-feather="mail"></i>
+                <span>Contact</span>
+            </a>
+        </div>
+        
+        <!-- 모바일 언어 선택기 -->
+        <div class="mobile-menu-section">
+            <div class="mobile-menu-title">Language</div>
+            <div class="mobile-language-options">
+                <div class="mobile-language-option active" data-lang="en">English</div>
+                <div class="mobile-language-option" data-lang="es">Español</div>
+                <div class="mobile-language-option" data-lang="ko">한국어</div>
+            </div>
+        </div>
+        
+        <!-- 모바일 팔레트 선택기 -->
+        <div class="mobile-menu-section">
+            <div class="mobile-menu-title">Color Theme</div>
+            <div class="mobile-palette-options">
+                <div class="mobile-palette-option palette-blue active" data-theme="theme-blue"></div>
+                <div class="mobile-palette-option palette-purple" data-theme="theme-purple"></div>
+                <div class="mobile-palette-option palette-pink" data-theme="theme-pink"></div>
+                <div class="mobile-palette-option palette-yellow" data-theme="theme-yellow"></div>
+                <div class="mobile-palette-option palette-green" data-theme="theme-green"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 모바일 메뉴 오버레이 -->
+    <div class="menu-overlay"></div>
+
+    <main>
+        <!-- 히어로 섹션 -->
+        <section class="hero">
+            <div class="hero-content">
+                <!-- 인사말과 아바타 -->
+                <div class="intro-container">
+                    <div class="avatar">
+                        <img src="img/avatar.png" alt="Y's avatar" loading="lazy">
+                    </div>
+                    <div class="greeting">
+                        <span>Hello, I'm Y</span>
+                    </div>
+                </div>
+                
+                <!-- 타이틀 -->
+                <h1 class="title-large">
+                    <span class="text-accent">DIGITAL</span><br>
+                    <span class="text-highlight">EXPERIENCE</span><br>
+                    <span class="text-accent">DESIGNER</span>
+                    <span>&</span>
+                    <span class="text-secondary-accent">DEVELOPER.</span>
+                </h1>
+                
+                <!-- 배지 -->
+                <div class="badges">
+                    <div class="badge">
+                        <span class="accent-dot"></span>
+                        UI/UX Designer
+                    </div>
+                    <div class="badge">
+                        <span class="accent-dot"></span>
+                        Full-Stack Developer
+                    </div>
+                    <div class="badge badge-accent">
+                        High School Developer
+                    </div>
+                </div>
+                
+                <!-- 태그라인 -->
+                <p class="tagline">
+                    I create digital experiences that balance<br>
+                    <span class="text-accent">efficiency</span>, <span class="text-highlight">aesthetics</span> and <span class="text-secondary-accent">functionality</span>.
+                </p>
+                
+                <!-- 버튼 -->
+                <a href="#about" class="connect-btn">
+                    Learn More About Me
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/>
+                    </svg>
+                </a>
+                
+                <!-- 위치 정보 -->
+                <div class="location">
+                    // Based in<br>
+                    Monterrey, Mexico
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me 소개 섹션 -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2 class="section-title">About <span class="text-accent">Me</span></h2>
+                <div class="about-grid">
+                    <div class="about-image">
+                        <img src="img/profile.png" alt="Y's Profile" loading="lazy">
+                        <div class="about-image-overlay"></div>
+                    </div>
+                    <div class="about-content">
+                        <h2>Who I Am</h2>
+                        <p class="about-text">
+                            I'm Y, a passionate Digital Experience Designer & Developer from Monterrey, Mexico. With over 8 years of experience in UI/UX design and full-stack development, I specialize in creating intuitive and engaging digital experiences that merge aesthetics with functionality.
+                        </p>
+                        <p class="about-text">
+                            My design philosophy centers around understanding user needs and business objectives to craft solutions that are not only visually appealing but also practical and effective. I believe in continuous learning and staying updated with the latest technologies and design trends.
+                        </p>
+                        <p class="about-text">
+                            When I'm not designing or coding, you can find me exploring nature, capturing moments through photography, or experimenting with new recipes in the kitchen.
+                        </p>
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">8+</div>
+                                <div class="stat-label">Years Experience</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">50+</div>
+                                <div class="stat-label">Projects Completed</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">30+</div>
+                                <div class="stat-label">Happy Clients</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills 섹션 -->
+        <section class="skills-section">
+            <div class="container">
+                <h2 class="section-title">My <span class="text-accent">Skills</span></h2>
+                <div class="skills-categories">
+                    <div class="skills-category">
+                        <h3 class="category-title">Design</h3>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <svg class="skill-icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M17.5,12A1.5,1.5 0 0,1 16,10.5A1.5,1.5 0 0,1 17.5,9A1.5,1.5 0 0,1 19,10.5A1.5,1.5 0 0,1 17.5,12M14.5,8A1.5,1.5 0 0,1 13,6.5A1.5,1.5 0 0,1 14.5,5A1.5,1.5 0 0,1 16,6.5A1.5,1.5 0 0,1 14.5,8M9.5,8A1.5,1.5 0 0,1 8,6.5A1.5,1.5 0 0,1 9.5,5A1.5,1.5 0 0,1 11,6.5A1.5,1.5 0 0,1 9.5,8M6.5,12A1.5,1.5 0 0,1 5,10.5A1.5,1.5 0 0,1 6.5,9A1.5,1.5 0 0,1 8,10.5A1.5,1.5 0 0,1 6.5,12M12,3A9,9 0 0,0 3,12A9,9 0 0,0 12,21A9,9 0 0,0 21,12A9,9 0 0,0 12,3Z"/>
+                                </svg>
+                                UI/UX Design
+                            </div>
+                            <div class="skill-item">
+                                <svg class="skill-icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M3,3H21V5H3V3M3,7H15V9H3V7M3,11H21V13H3V11M3,15H15V17H3V15M3,19H21V21H3V19Z"/>
+                                </svg>
+                                Wireframing
+                            </div>
+                            <div class="skill-item">
+                                <svg class="skill-icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,5V19H5V5H19Z"/>
+                                    <path fill="currentColor" d="M12,6A1,1 0 0,0 11,7A1,1 0 0,0 12,8A1,1 0 0,0 13,7A1,1 0 0,0 12,6M6,10A1,1 0 0,0 5,11A1,1 0 0,0 6,12A1,1 0 0,0 7,11A1,1 0 0,0 6,10M6,14A1,1 0 0,0 5,15A1,1 0 0,0 6,16A1,1 0 0,0 7,15A1,1 0 0,0 6,14M12,10A1,1 0 0,0 11,11A1,1 0 0,0 12,12A1,1 0 0,0 13,11A1,1 0 0,0 12,10M18,10A1,1 0 0,0 17,11A1,1 0 0,0 18,12A1,1 0 0,0 19,11A1,1 0 0,0 18,10M12,14A1,1 0 0,0 11,15A1,1 0 0,0 12,16A1,1 0 0,0 13,15A1,1 0 0,0 12,14M18,14A1,1 0 0,0 17,15A1,1 0 0,0 18,16A1,1 0 0,0 19,15A1,1 0 0,0 18,14Z"/>
+                                </svg>
+                                Prototyping
+                            </div>
+                            <div class="skill-item">
+                                <svg class="skill-icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8M12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.18V3H15.82L13.9,1.1L12,3L10.1,1.1L8.18,3H4V8.18L2.1,10.1L4,12L2.1,13.9L4,15.82V21H8.18L10.1,22.9L12,21L13.9,22.9L15.82,21H20V15.82L21.9,13.9L20,12L21.9,10.1L20,8.18Z"/>
+                                </svg>
+                                Visual Design
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-category">
+                        <h3 class="category-title">Development</h3>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <svg class="skill-icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z"/>
+                                </svg>
+                                HTML/CSS/JS
+                            </div>
+                            <div class="skill-item">
+                                <svg class="skill-icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M12,10.11C13.03,10.11 13.87,10.95 13.87,12C13.87,13 13.03,13.85 12,13.85C10.97,13.85 10.13,13 10.13,12C10.13,10.95 10.97,10.11 12,10.11M7.37,20C8,20.38 9.38,19.8 10.97,18.3C10.45,17.71 9.94,17.07 9.46,16.4C8.64,16.32 7.83,16.2 7.06,16.04C6.55,18.18 6.74,19.65 7.37,20M8.08,14.26L7.79,13.75C7.68,14.04 7.57,14.33 7.5,14.61C7.77,14.67 8.07,14.72 8.38,14.77C8.28,14.6 8.18,14.43 8.08,14.26Z"/>
+                                </svg>
+                                React
+                            </div>
+                            <div class="skill-item">
+                                <svg class="skill-icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M12,1.85C11.73,1.85 11.45,1.92 11.22,2.05L3.78,6.35C3.3,6.63 3,7.15 3,7.71V16.29C3,16.85 3.3,17.37 3.78,17.65L5.73,18.77C6.68,19.23 7,19.24 7.44,19.24C8.84,19.24 9.65,18.39 9.65,16.91V8.44C9.65,8.32 9.55,8.22 9.43,8.22H8.5C8.37,8.22 8.27,8.32 8.27,8.44V16.91C8.27,17.57 7.59,18.22 6.5,17.67L4.45,16.5C4.38,16.45 4.34,16.37 4.34,16.29V7.71C4.34,7.62 4.38,7.54 4.45,7.5L11.89,3.21C11.95,3.17 12.05,3.17 12.11,3.21L19.55,7.5C19.62,7.54 19.66,7.62 19.66,7.71V16.29C19.66,16.37 19.62,16.45 19.55,16.5L12.11,20.79C12.05,20.83 11.95,20.83 11.88,20.79L10,19.65C9.92,19.62 9.84,19.61 9.79,19.64C9.26,19.94 9.16,20 8.67,20.15C8.55,20.19 8.36,20.26 8.74,20.47L11.22,21.94C11.46,22.08 11.72,22.15 12,22.15C12.28,22.15 12.54,22.08 12.78,21.94L20.22,17.65C20.7,17.37 21,16.85 21,16.29V7.71C21,7.15 20.7,6.63 20.22,6.35L12.78,2.05C12.55,1.92 12.28,1.85 12,1.85Z"/>
+                                </svg>
+                                Node.js
+                            </div>
+                            <div class="skill-item">
+                                <svg class="skill-icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M6,3A3,3 0 0,1 9,6C9,6.97 8.43,7.8 7.6,8.21L9.4,11.2C10.84,10.43 12.04,9.28 12.82,7.93L10.03,3H14.5A1.5,1.5 0 0,1 16,4.5C16,5.21 15.5,5.79 14.83,5.94L14.66,7.5H15C16.81,7.5 18.41,8.09 19.73,9.03L22,5.28V15L18.92,11.18C17.9,14.21 15.14,16.5 11.87,16.5C10.93,16.5 10.03,16.33 9.21,16L7.08,20.11L4.96,19.24L7.08,15.13C5.38,13.92 4.22,12.03 4.03,9.85C2.31,9.44 1,7.97 1,6.25C1,4.5 2.5,3 4.25,3H6Z"/>
+                                </svg>
+                                MongoDB
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-category">
+                        <h3 class="category-title">Tools</h3>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <svg class="skill-icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M15.9,17.5c-.1-.1-.1-.2-.2-.2-.3-.2-.7-.2-1.2-.2-.4,0-.9,.1-1.4,.1-.6,.1-1.1,.1-1.5,.1-.5,0-1-.1-1.3-.2-.4-.2-.7-.4-.9-.7-.2-.3-.4-.7-.5-1.1h-.5c0,.4-.1,.8-.2,1.1l-.6-.1h-.5c.2-.6,.3-1.1,.3-1.7,.1-.3,.1-.7,.1-1.1s0-.8,.1-1.1c.2-.1,.5-.2,.9-.2,0,.7,0,1.2-.1,1.5-.1,.3-.2,.7-.3,1.2,.2-.1,.3-.2,.5-.3,.2-.1,.3-.3,.4-.5,.1-.2,.2-.5,.3-.8s.1-.7,.1-1.1c0-.5,0-1-.1-1.4-.1-.4-.3-.7-.6-1-.3-.2-.7-.4-1.1-.4-.2,0-.4,0-.6,.1-.1-.1-.3-.2-.4-.4-.1-.2-.2-.4-.3-.7,1.1-.1,2-.1,2.8-.1,1,0,1.8,0,2.5,.1,.7,.1,1.2,.2,1.7,.3,.5,.1,.8,.3,1,.4,.1,.1,.2,.2,.3,.4,0,.2,0,.4-.1,.6-.1,.1-.1,.1-.2,.2-.2,0-.5,.1-.8,.1-.3,0-.7,0-1.2,0,.1,.2,.2,.5,.2,.70, .4,.4-.1,.6,.1-.1,1-.1,1.4-.1,-.2 0-.5,.1-.8,.1-.3,0-.7,0-1.2,0,.1,.2,.2,.5,.2,.7,0,.2,.1,.5,.1,.7,0,.2,0,.4-.1,.6-.1,.2-.1,.4-.2,.5,.1,0,.2,0,.3,0,.2,0,.4,0,.6-.1,.2,0,.4-.1,.7-.1,.5,0,.9,0,1.3,.1,.4,.1,.7,.2,.9,.4,.1,.1,.2,.2,.2,.3,0,.1,0,.2-.1,.3"/>
+                                </svg>
+                                Figma
+                            </div>
+                            <div class="skill-item">
+                                <svg class="skill-icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M11.14 0L0 19.5l12.86 4.5V0h-1.72M12.86 0V24l12.86-4.5L14.57 0h-1.71Z"/>
+                                </svg>
+                                Adobe XD
+                            </div>
+                            <div class="skill-item">
+                                <svg class="skill-icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M2.6,10.59L8.38,4.8L10.07,6.5C9.83,7.35 10.22,8.28 11,8.73V14.27C10.4,14.61 10,15.26 10,16A2,2 0 0,0 12,18A2,2 0 0,0 14,16C14,15.26 13.6,14.61 13,14.27V9.41L15.07,11.5C15,11.65 15,11.82 15,12A2,2 0 0,0 17,14A2,2 0 0,0 19,12A2,2 0 0,0 17,10C16.82,10 16.65,10 16.5,10.07L13.93,7.5C14.19,6.57 13.71,5.55 12.78,5.16C12.35,5 11.9,4.96 11.5,5.07L9.8,3.38L10.59,2.6C11.37,1.81 12.63,1.81 13.41,2.6L21.4,10.59C22.19,11.37 22.19,12.63 21.4,13.41L13.41,21.4C12.63,22.19 11.37,22.19 10.59,21.4L2.6,13.41C1.81,12.63 1.81,11.37 2.6,10.59Z"/>
+                                </svg>
+                                Git
+                            </div>
+                            <div class="skill-item">
+                                <svg class="skill-icon" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M17,16.47V7.39L11,11.93M2.22,9.19C1.92,8.87 1.91,8.37 2.2,8.04L21.26,1.2L17.04,21.26C16.81,21.73 16.23,21.93 15.77,21.7L9.53,18.17L6.33,21.29C5.85,21.77 5,21.42 5,20.74V16.24L2.22,9.19Z"/>
+                                </svg>
+                                VS Code
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- 경력 섹션 -->
+            <section class="experience-section">
+                <div class="container">
+                    <h2 class="section-title">Work <span class="text-accent">Experience</span></h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">2022 - Present</div>
+                                <h3 class="timeline-title">Senior UI/UX Designer & Developer</h3>
+                                <div class="timeline-company">TechInnovate Solutions</div>
+                                <p class="timeline-description">Leading design and development for enterprise-level web applications. Collaborate with cross-functional teams to deliver intuitive and scalable digital solutions.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">2019 - 2022</div>
+                                <h3 class="timeline-title">Product Designer</h3>
+                                <div class="timeline-company">CreativeDigital Agency</div>
+                                <p class="timeline-description">Designed and prototyped user interfaces for various client projects. Conducted user research and testing to improve product usability and user satisfaction.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">2017 - 2019</div>
+                                <h3 class="timeline-title">Frontend Developer</h3>
+                                <div class="timeline-company">WebTech Solutions</div>
+                                <p class="timeline-description">Developed responsive websites and web applications using modern frontend technologies. Collaborated with designers to implement pixel-perfect UI from design mockups.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- 교육 섹션 -->
+            <section class="education-section">
+                <div class="container">
+                    <h2 class="section-title">Education & <span class="text-accent">Certifications</span></h2>
+                    <div class="education-cards">
+                        <div class="education-card">
+                            <div class="education-date">2011 - 2015</div>
+                            <h3 class="education-degree">Bachelor of Technology in Computer Science</h3>
+                            <div class="education-school">Kerala Technical University</div>
+                            <p class="education-description">Graduated with honors. Specialized in User Interface Design and Web Development. Participated in multiple hackathons and design competitions.</p>
+                        </div>
+                        <div class="education-card">
+                            <div class="education-date">2019</div>
+                            <h3 class="education-degree">UX Design Certification</h3>
+                            <div class="education-school">Google UX Design Professional Certificate</div>
+                            <p class="education-description">Comprehensive program covering the UX design process, including conducting user research, creating wireframes and prototypes, and testing designs.</p>
+                        </div>
+                        <div class="education-card">
+                            <div class="education-date">2020</div>
+                            <h3 class="education-degree">Full-Stack Web Development</h3>
+                            <div class="education-school">Full Stack Academy</div>
+                            <p class="education-description">Intensive program focused on modern web development technologies including React, Node.js, and MongoDB. Developed multiple full-stack applications.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- 주요 프로젝트 섹션 -->
+            <section class="featured-projects">
+                <div class="container">
+                    <h2 class="section-title">Featured <span class="text-accent">Projects</span></h2>
+                    <div class="featured-project">
+                        <div class="featured-project-image">
+                            <img src="assets/img/featured-project.jpg" alt="E-commerce Dashboard" loading="lazy">
+                        </div>
+                        <div class="featured-project-content">
+                            <div class="featured-badge">
+                                <span class="accent-dot"></span>
+                                Featured Project
+                            </div>
+                            <h2 class="featured-project-title">E-commerce Dashboard Redesign</h2>
+                            <p class="featured-project-description">A complete overhaul of an e-commerce analytics dashboard, focusing on data visualization, intuitive navigation, and actionable insights. The redesign increased user engagement by 37% and reduced decision-making time by 28%.</p>
+                            <div class="tech-stack">
+                                <div class="tech-item">React</div>
+                                <div class="tech-item">TypeScript</div>
+                                <div class="tech-item">D3.js</div>
+                                <div class="tech-item">Figma</div>
+                                <div class="tech-item">Node.js</div>
+                            </div>
+                            <a href="projects.html" class="project-btn">
+                                View Case Study
+                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="assets/img/project-1.jpg" alt="Mobile Banking App" loading="lazy">
+                            </div>
+                            <div class="project-content">
+                                <div class="project-tags">
+                                    <div class="project-tag">UI/UX Design</div>
+                                    <div class="project-tag">Mobile</div>
+                                </div>
+                                <h3 class="project-title">Mobile Banking App</h3>
+                                <p class="project-description">A modern banking application designed for millennials, focusing on financial goals and spending habits visualization.</p>
+                                <div class="project-links">
+                                    <a href="projects.html" class="project-link">
+                                        <svg class="project-link-icon" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                                        </svg>
+                                        View Project
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="assets/img/project-2.jpg" alt="Healthcare Portal" loading="lazy">
+                            </div>
+                            <div class="project-content">
+                                <div class="project-tags">
+                                    <div class="project-tag">Web App</div>
+                                    <div class="project-tag">Full-Stack</div>
+                                </div>
+                                <h3 class="project-title">Healthcare Patient Portal</h3>
+                                <p class="project-description">A comprehensive patient management system that simplifies appointment scheduling and medical record access.</p>
+                                <div class="project-links">
+                                    <a href="projects.html" class="project-link">
+                                        <svg class="project-link-icon" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                                        </svg>
+                                        View Project
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="view-all">
+                        <a href="projects.html" class="outline-btn">
+                            View All Projects
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- 연락처 섹션 -->
+            <section id="contact" class="contact-section">
+                <div class="container">
+                    <h2 class="section-title">Get In <span class="text-accent">Touch</span></h2>
+                    <p class="page-description">Have a project in mind or want to discuss a potential collaboration? Feel free to reach out to me through any of the following channels.</p>
+                    <div class="contact-cards">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
+                                </svg>
+                            </div>
+                            <h3 class="contact-method">Email</h3>
+                            <p class="contact-info">Y@gmail.com</p>
+                            <a href="mailto:Y@gmail.com" class="contact-link">
+                                Send Email
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                                </svg>
+                            </div>
+                            <h3 class="contact-method">LinkedIn</h3>
+                            <p class="contact-info">Connect with me professionally</p>
+                            <a href="https://linkedin.com/in/Y" class="contact-link">
+                                View Profile
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="contact-method">GitHub</h3>
+                            <p class="contact-info">Check out my code repositories</p>
+                            <a href="https://github.com/Y" class="contact-link">
+                                View Projects
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="mailto:Y@gmail.com" class="connect-btn">
+                        <div class="accent-dot"></div>
+                        Let's Work Together
+                    </a>
+                </div>
+            </section>
+        </main>
+    
+        <footer>
+            <div class="container">
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <svg class="social-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link">
+                        <svg class="social-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link">
+                        <svg class="social-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="footer-tagline">
+                    // Design, Code, Engage
+                </div>
+                <div class="email">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
+                    </svg>
+                    Y@gmail.com
+                </div>
+            </div>
+        </footer>
+    
+        <!-- 페이지 스크롤 네비게이션 -->
+        <div class="scroll-nav">
+            <a href="#" class="scroll-nav-dot active" data-section="hero" title="Home"></a>
+            <a href="#about" class="scroll-nav-dot" data-section="about" title="About"></a>
+            <a href="#contact" class="scroll-nav-dot" data-section="contact" title="Contact"></a>
+        </div>
+    
+        <!-- 페이지 로딩 인디케이터 -->
+        <div class="page-loader">
+            <div class="loader-circle"></div>
+        </div>
+
+        <!-- 페이지 트랜지션 효과 추가 -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // 페이지 로딩 완료 시 body에 loaded 클래스 추가
+                setTimeout(function() {
+                    document.body.classList.add('loaded');
+                    
+                    // 페이지 로더 숨기기
+                    const pageLoader = document.querySelector('.page-loader');
+                    if (pageLoader) {
+                        pageLoader.style.display = 'none';
+                    }
+                }, 300);
+            });
+
+            if (document.referrer === '' || !document.referrer.includes(window.location.hostname)) {
+            // 직접 접근한 경우 (welcome.html을 통해 오지 않은 경우) index.html로 리디렉션
+            window.location.href = 'index.html';
+        }
+        </script>
+    </body>
+    </html>
