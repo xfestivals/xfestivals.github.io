@@ -205,7 +205,6 @@
         
         // 페이지 로드 시 실행
         document.addEventListener('DOMContentLoaded', function() {
-            // 초기 깜빡이는 커서 표시 후 타이핑 시작
             setTimeout(() => {
                 cursorOnly.style.display = 'none';
                 typingText.style.display = 'block';
@@ -213,20 +212,16 @@
             }, 1000);
         });
         
-        // 타이핑 효과 구현
         function typeText() {
             if (charIndex < textToType.length) {
                 typingText.textContent += textToType.charAt(charIndex);
                 charIndex++;
                 
-                // 타이핑된 텍스트 너비 조정
                 typingText.style.width = typingText.textContent.length + 'ch';
                 
-                // 다음 글자 타이핑 (랜덤 딜레이로 자연스럽게)
                 const randomDelay = Math.floor(Math.random() * 70) + 150; // 150-220ms
                 setTimeout(typeText, randomDelay);
             } else {
-                // 타이핑 완료 후 잠시 대기
                 setTimeout(() => {
                     typingText.style.borderRight = "none";
                     typingText.style.display = 'none';
@@ -235,44 +230,36 @@
             }
         }
         
-        // 다국어 인사말 표시
         function showGreetings() {
             let currentIndex = 0;
             
             function nextGreeting() {
-                // 현재 표시 중인 인사말 숨기기
                 if (currentIndex > 0) {
                     greetings[currentIndex - 1].style.display = 'none';
                     greetings[currentIndex - 1].classList.remove('active');
                 }
                 
                 if (currentIndex < greetings.length) {
-                    // 다음 인사말 표시
                     greetings[currentIndex].style.display = 'block';
                     greetings[currentIndex].classList.add('active');
                     currentIndex++;
                     
-                    // 15개 인사말을 2초 동안 표시 (각 133ms)
                     setTimeout(nextGreeting, 133);
                 } else {
-                    // 모든 인사말 표시 완료, 메인 컨텐츠로 전환
                     skipButton.style.display = 'none';
                     
-                    // 애니메이션 완료 후 main.html로 리디렉션
                     setTimeout(() => {
                         window.location.href = 'main.html';
                     }, 500);
                 }
             }
             
-            // 인사말 시퀀스 시작
             nextGreeting();
         }
         
-        // 스킵 버튼 클릭 시 인사말 건너뛰기
         skipButton.addEventListener('click', function() {
             skipButton.style.display = 'none';
-            window.location.href = 'main.html'; // 바로 이동
+            window.location.href = 'main.html'; 
         });
     </script>
 </body>
